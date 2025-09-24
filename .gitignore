@@ -1,0 +1,44 @@
+# --- Unity generated folders ---
+[Ll]ibrary/
+[Tt]emp/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+[Oo]bj/
+UserSettings/
+
+# --- Visual Studio / VS Code ---
+.vscode/
+.vs/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+# --- OS-specific junk ---
+.DS_Store
+Thumbs.db
+
+# --- Rider (JetBrains IDE) ---
+.idea/
+
+# --- Gradle / Android ---
+.gradle/
+.gradle-cache/
+*.apk
+*.aab
+
+# --- Crash / profiling dumps ---
+sysinfo.txt
+*.stackdump
+*.dmp
+
+# --- Addressables / Cache ---
+/[Aa]sset[Ss]tore/
