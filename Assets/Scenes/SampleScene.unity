@@ -19113,7 +19113,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -207.74998, y: 214.31085}
-  m_SizeDelta: {x: 415.5, y: 63.8883}
+  m_SizeDelta: {x: 415, y: 63.8883}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1773663531
 GameObject:
@@ -20486,19 +20486,19 @@ PrefabInstance:
     - target: {fileID: 1842264976751108780, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
       propertyPath: hearts.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1941761141}
     - target: {fileID: 1842264976751108780, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
       propertyPath: hearts.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 767248327}
     - target: {fileID: 1842264976751108780, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
       propertyPath: hearts.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1074802801}
     - target: {fileID: 1842264976751108780, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
       propertyPath: hearts.Array.data[4]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 844857433}
     - target: {fileID: 2499850541757933092, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.1
