@@ -61,10 +61,10 @@ public class PlayerControl : MonoBehaviour
         animator.SetBool("isMoving", moveInput != 0);
 
         // Flip sprite
-        if (moveInput > 0)
+        /*if (moveInput > 0)
             transform.localScale = new Vector3(1, 1, 1);
         else if (moveInput < 0)
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1, 1, 1);*/
     }
 
     void FixedUpdate()
