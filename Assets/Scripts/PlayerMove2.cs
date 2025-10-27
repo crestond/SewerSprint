@@ -56,11 +56,7 @@ public class PlayerMove2 : MonoBehaviour
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
-        //jump
-        /*if (Input.GetKey(KeyCode.Space) && grounded)
-        {
-            jump();
-        }
+        
 
         //sets animation*/
 
@@ -79,11 +75,11 @@ public class PlayerMove2 : MonoBehaviour
         anim.SetBool("walk", HorizontalInput != 0);
     }
 
-    private void jump()
+    /*private void jump()
     {
         body.velocity = new Vector2(body.velocity.x, JumpForce);
         grounded = false;
-    }
+    }*/
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
