@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5378194235436036961}
   - component: {fileID: 1866399762117519587}
   - component: {fileID: 4533655950400264278}
+  - component: {fileID: 3262727022201805887}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,14 +96,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8214494286519119216}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e41756ec708e9b4db9a0a6807876612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
   moveSpeed: 5
   jumpForce: 7
+  scoreText: {fileID: 0}
   jumpCutMultiplier: 2
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  RestartButton: {fileID: 0}
+  YouDiedText: {fileID: 0}
+  YouWonText: {fileID: 0}
   groundCheck: {fileID: 0}
   groundCheckRadius: 1.2
   groundLayer:
@@ -118,7 +130,7 @@ Animator:
   m_GameObject: {fileID: 8214494286519119216}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c53263714625af245a4b21dc907d7d9c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 48aca70960d753342b8979c68f1256df, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -191,3 +203,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1.2}
   m_Direction: 0
+--- !u!114 &3262727022201805887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8214494286519119216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6a6cc2a62f583429d4167f5be172b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  JumpForce: 7
+  jumpCutMultiplier: 2
