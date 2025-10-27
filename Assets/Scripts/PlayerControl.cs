@@ -132,7 +132,7 @@ public class PlayerControl : MonoBehaviour
     }
     private void UpdateScoreUI()
     {
-        scoreText.text = "Score: +" + score;
+        scoreText.text = "Score: " + score;
     }
     public void RestartGame()
     {
