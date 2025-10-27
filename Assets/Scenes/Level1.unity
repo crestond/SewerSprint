@@ -3626,8 +3626,13 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_AnchoredPosition: {x: 284, y: 215}
   m_SizeDelta: {x: 200, y: 50}
+=======
+  m_AnchoredPosition: {x: -726, y: 416}
+  m_SizeDelta: {x: 300, y: 10}
+>>>>>>> Stashed changes
 =======
   m_AnchoredPosition: {x: -726, y: 416}
   m_SizeDelta: {x: 300, y: 10}
@@ -19178,6 +19183,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -20007,7 +20015,11 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_AnchoredPosition: {x: -207.74998, y: 214.31085}
+=======
+  m_AnchoredPosition: {x: -724, y: 444}
+>>>>>>> Stashed changes
 =======
   m_AnchoredPosition: {x: -724, y: 444}
 >>>>>>> Stashed changes
@@ -20153,7 +20165,11 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0000038146973, y: 90}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_SizeDelta: {x: 220, y: 80}
+=======
+  m_SizeDelta: {x: 300, y: 100}
+>>>>>>> Stashed changes
 =======
   m_SizeDelta: {x: 300, y: 100}
 >>>>>>> Stashed changes
@@ -21592,6 +21608,7 @@ PrefabInstance:
     - target: {fileID: 1842264976751108780, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
       propertyPath: jumpForce
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1842264976751108780, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
@@ -21602,11 +21619,16 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 1
 =======
+=======
+>>>>>>> Stashed changes
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1842264976751108780, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
       propertyPath: moveSpeed
       value: 3
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 1842264976751108780, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
@@ -45528,9 +45550,13 @@ SceneRoots:
   - {fileID: 1636994626}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   - {fileID: 139976616}
 =======
   - {fileID: 62510071}
+>>>>>>> Stashed changes
+=======
+  - {fileID: 1689044205}
 >>>>>>> Stashed changes
 =======
   - {fileID: 1689044205}
