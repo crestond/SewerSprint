@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 6151095032340800492}
   - component: {fileID: 6774324793128950533}
   m_Layer: 0
-  m_Name: monster
+  m_Name: Rat
   m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -34,7 +34,7 @@ public class PlayerMove2 : MonoBehaviour
     private Rigidbody2D body;
     private Animator anim;
     private bool grounded;
-
+    
     private void Awake()
     {
         //grabs references
