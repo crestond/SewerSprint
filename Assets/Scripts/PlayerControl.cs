@@ -52,6 +52,7 @@ public class PlayerControl : MonoBehaviour
         {
             
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            GetComponent<PlayerSound>().PlayJumpSound();
         }
         // Variable jump↓
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0)
@@ -163,5 +164,6 @@ public class PlayerControl : MonoBehaviour
         }
         
     }
+ 
 }
 
