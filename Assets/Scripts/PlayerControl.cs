@@ -154,7 +154,7 @@ public class PlayerControl : MonoBehaviour
         }
         else if (WonLevel)
         {
-            SceneManager.LoadScene("Level2");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         
     }
