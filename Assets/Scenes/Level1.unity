@@ -2374,6 +2374,7 @@ GameObject:
   - component: {fileID: 607298216}
   - component: {fileID: 607298218}
   - component: {fileID: 607298217}
+  - component: {fileID: 607298219}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2497,6 +2498,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 607298215}
   m_CullTransparentMesh: 1
+--- !u!114 &607298219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607298215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e41756ec708e9b4db9a0a6807876612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  moveSpeed: 5
+  jumpForce: 3
+  scoreText: {fileID: 0}
+  flowButtonText: {fileID: 0}
+  jumpCutMultiplier: 2
+  hearts: []
+  FlowButton: {fileID: 0}
+  YouDiedText: {fileID: 0}
+  YouWonText: {fileID: 0}
+  groundCheck: {fileID: 0}
+  groundCheckRadius: 1.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &607812837
 GameObject:
   m_ObjectHideFlags: 0
@@ -21649,6 +21677,10 @@ PrefabInstance:
       propertyPath: RestartButton
       value: 
       objectReference: {fileID: 1877492254}
+    - target: {fileID: 1842264976751108780, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
+      propertyPath: flowButtonText
+      value: 
+      objectReference: {fileID: 607298217}
     - target: {fileID: 1842264976751108780, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
       propertyPath: hearts.Array.size
       value: 5

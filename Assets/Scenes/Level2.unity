@@ -10537,6 +10537,21 @@ Transform:
   - {fileID: 1993423941}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1710012314 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7574192571255794550, guid: 48871079224b11344a2fb51e97ab161c, type: 3}
+  m_PrefabInstance: {fileID: 547419260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1748251904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5625453356086953749, guid: 48871079224b11344a2fb51e97ab161c, type: 3}
+  m_PrefabInstance: {fileID: 547419260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1854507638 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3749537000027783198, guid: 48871079224b11344a2fb51e97ab161c, type: 3}
+  m_PrefabInstance: {fileID: 547419260}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1874277669
 GameObject:
   m_ObjectHideFlags: 0
@@ -11087,13 +11102,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1842264976751108780, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
+      propertyPath: FlowButton
+      value: 
+      objectReference: {fileID: 1710012314}
+    - target: {fileID: 1842264976751108780, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
       propertyPath: YouWonText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1748251904}
     - target: {fileID: 1842264976751108780, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
       propertyPath: YouDiedText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1854507638}
     - target: {fileID: 1842264976751108780, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
       propertyPath: groundCheck
       value: 

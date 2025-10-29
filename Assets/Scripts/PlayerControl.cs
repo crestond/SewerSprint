@@ -93,6 +93,7 @@ public class PlayerControl : MonoBehaviour
                 WonLevel = true;
                 YouWonText.SetActive(true);
                 FlowButton.SetActive(true);
+                flowButtonText.text = "Next Level";
                 this.enabled = false;
                 break;
         }
@@ -131,6 +132,7 @@ public class PlayerControl : MonoBehaviour
 
                 YouDiedText.SetActive(true);
                 FlowButton.SetActive(true);
+                flowButtonText.text = "Restart";
                 isDead = true;
             }
         }
