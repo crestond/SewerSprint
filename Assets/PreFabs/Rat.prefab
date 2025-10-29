@@ -216,13 +216,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  chaseSpeed: 3.5
+  chaseSpeed: 2.8
   startMovingRight: 1
   groundCheck: {fileID: 8672407776127054417}
   groundCheckDistance: 0.5
   wallCheck: {fileID: 8672407776127054417}
   wallCheckDistance: 0.2
-  player: {fileID: 0}
+  autoFindPlayer: 1
   chaseRange: 2
   stopChaseRange: 4
   groundTag: Ground
