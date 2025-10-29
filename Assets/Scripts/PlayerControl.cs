@@ -94,7 +94,7 @@ public class PlayerControl : MonoBehaviour
                 YouWonText.SetActive(true);
                 FlowButton.SetActive(true);
                 flowButtonText.text = "Next Level";
-                this.enabled = false;
+               // this.enabled = false;
                 break;
         }
     }
@@ -128,12 +128,16 @@ public class PlayerControl : MonoBehaviour
             {
                 Debug.Log("Game Over!");
 
-                this.enabled = false; // disables this script (no movement/damage)
+                rb.velocity = Vector2.zero; // Stop player movement
+                rb.simulated = false; // Disable physics simulation
+                GetComponent<Collider2D>().enabled = false; // Disable collider
+                this.enabled = false; // Disable this script
 
                 YouDiedText.SetActive(true);
                 FlowButton.SetActive(true);
                 flowButtonText.text = "Restart";
                 isDead = true;
+
             }
         }
     }
@@ -143,6 +147,7 @@ public class PlayerControl : MonoBehaviour
     }
     public void FlowGame()
     {
+        Debug.Log("FlowGame pressed");
         if (isDead)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
