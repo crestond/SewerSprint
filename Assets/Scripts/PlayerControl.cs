@@ -5,7 +5,6 @@ using TMPro;
 
 public class PlayerControl : MonoBehaviour
 {
-    public int score = 0;
     private bool canJump;
     public float moveSpeed = 5f;       // Horizontal movement speed
     public float jumpForce = 3f;       // Jump power
@@ -30,12 +29,15 @@ public class PlayerControl : MonoBehaviour
 
     private void Awake()
     {
+
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        
+
         FlowButton.SetActive(false);
         YouDiedText.SetActive(false);
         YouWonText.SetActive(false);
+
+        UpdateScoreUI();
     }
 
     void Update()
@@ -102,7 +104,8 @@ public class PlayerControl : MonoBehaviour
         {
             if (other.CompareTag("Coin"))
             {
-                score += 10;
+
+                GameData.score += 10;
                 UpdateScoreUI();
                 Destroy(other.gameObject);
             }
@@ -143,7 +146,7 @@ public class PlayerControl : MonoBehaviour
     }
     private void UpdateScoreUI()
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Score: " + GameData.score;
     }
     public void FlowGame()
     {
