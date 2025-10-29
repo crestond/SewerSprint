@@ -136,6 +136,8 @@ public class PlayerControl : MonoBehaviour
                 GetComponent<Collider2D>().enabled = false; // Disable collider
                 this.enabled = false; // Disable this script
 
+                GameData.score = 0;
+
                 YouDiedText.SetActive(true);
                 FlowButton.SetActive(true);
                 flowButtonText.text = "Restart";
