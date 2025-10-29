@@ -12,11 +12,14 @@ public class PlayerControl : MonoBehaviour
     private bool isGrounded = true;           // Check if player is on ground
     private Rigidbody2D rb;
     private Animator animator;
+    private bool isDead = false;
+    private bool WonLevel = false;
 
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI flowButtonText;
     [SerializeField] private float jumpCutMultiplier = 2f;
     [SerializeField] private List<GameObject> hearts;
-    [SerializeField] private GameObject RestartButton;
+    [SerializeField] private GameObject FlowButton;
     [SerializeField] private GameObject YouDiedText;
     [SerializeField] private GameObject YouWonText;
 
@@ -30,7 +33,7 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         
-        RestartButton.SetActive(false);
+        FlowButton.SetActive(false);
         YouDiedText.SetActive(false);
         YouWonText.SetActive(false);
     }
@@ -87,8 +90,9 @@ public class PlayerControl : MonoBehaviour
                 RemoveHeart();
                 break;
             case "Finish":
+                WonLevel = true;
                 YouWonText.SetActive(true);
-                RestartButton.SetActive(true);
+                FlowButton.SetActive(true);
                 this.enabled = false;
                 break;
         }
@@ -126,7 +130,8 @@ public class PlayerControl : MonoBehaviour
                 this.enabled = false; // disables this script (no movement/damage)
 
                 YouDiedText.SetActive(true);
-                RestartButton.SetActive(true);
+                FlowButton.SetActive(true);
+                isDead = true;
             }
         }
     }
@@ -134,9 +139,17 @@ public class PlayerControl : MonoBehaviour
     {
         scoreText.text = "Score: " + score;
     }
-    public void RestartGame()
+    public void FlowGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (isDead)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else if (WonLevel)
+        {
+            SceneManager.LoadScene("Level2");
+        }
+        
     }
 }
 
