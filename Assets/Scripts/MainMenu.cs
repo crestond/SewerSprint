@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+/*
     public void goToSettingsMenu()
     {
         SceneManager.LoadScene("SettingsMenu");
@@ -23,5 +24,5 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
-
+*/
 }
