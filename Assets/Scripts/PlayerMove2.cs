@@ -90,7 +90,7 @@ public class PlayerMove2 : MonoBehaviour
     }
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Hazard")
         {
             canJump = false;
         }
