@@ -3170,20 +3170,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e41756ec708e9b4db9a0a6807876612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpForce: 3
-  scoreText: {fileID: 0}
-  flowButtonText: {fileID: 0}
-  jumpCutMultiplier: 2
   hearts: []
-  FlowButton: {fileID: 0}
-  YouDiedText: {fileID: 0}
-  YouWonText: {fileID: 0}
-  groundCheck: {fileID: 0}
-  groundCheckRadius: 1.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  scoreText: {fileID: 745625438}
+  flowButtonText: {fileID: 0}
+  FlowButton: {fileID: 1877492254}
+  YouDiedText: {fileID: 36899738}
+  YouWonText: {fileID: 1707306825}
 --- !u!1 &643363064
 GameObject:
   m_ObjectHideFlags: 0
@@ -20886,7 +20878,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
