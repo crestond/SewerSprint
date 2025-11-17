@@ -18458,6 +18458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpSound: {fileID: 8300000, guid: 240d22c607fb47447bb03b272f51a328, type: 3}
+  audioSource: {fileID: 1000135506}
 --- !u!1 &1748251904 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5625453356086953749, guid: 48871079224b11344a2fb51e97ab161c, type: 3}
