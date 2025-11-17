@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerSound : MonoBehaviour
 {
-    public AudioClip jumpSound;
-    private AudioSource audioSource;
+    [SerializeField] public AudioClip jumpSound;
+    [SerializeField] private AudioSource audioSource;
 
     void Start()
     {
@@ -14,6 +14,6 @@ public class PlayerSound : MonoBehaviour
 
     public void PlayJumpSound()
     {
-        audioSource.PlayOneShot(jumpSound, 0.04f);
+        audioSource.PlayOneShot(jumpSound, .5f);
     }
 }
