@@ -1,169 +1,118 @@
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerControl : MonoBehaviour
 {
-    private bool canJump;
-    public float moveSpeed = 5f;       // Horizontal movement speed
-    public float jumpForce = 3f;       // Jump power
-    private bool isGrounded = true;           // Check if player is on ground
-    private Rigidbody2D rb;
-    private Animator animator;
-    private bool isDead = false;
-    private bool WonLevel = false;
-
+    [SerializeField] private List<GameObject> hearts;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI flowButtonText;
-    [SerializeField] private float jumpCutMultiplier = 2f;
-    [SerializeField] private List<GameObject> hearts;
     [SerializeField] private GameObject FlowButton;
     [SerializeField] private GameObject YouDiedText;
     [SerializeField] private GameObject YouWonText;
 
-    [Header("Ground Check")]
-    public Transform groundCheck;      // Empty object under player’s feet
-    public float groundCheckRadius = 1.2f;
-    public LayerMask groundLayer;      // What counts as ground
+    private PlayerMove2 playerMove2;
+
+    private Rigidbody2D rb;
+    private bool wonLevel = false;
+    public bool IsDead { get; private set; }
 
     private void Awake()
     {
-
+        playerMove2 = GetComponent<PlayerMove2>();
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-
         FlowButton.SetActive(false);
         YouDiedText.SetActive(false);
         YouWonText.SetActive(false);
-
         UpdateScoreUI();
     }
 
-    void Update()
-    {
-        // Horizontal movement
-        float moveInput = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
-
-        // Jump (only if grounded)
-        
-        if (Input.GetButtonDown("Jump") && canJump)
-        {
-            
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            GetComponent<PlayerSound>().PlayJumpSound();
-        }
-        // Variable jump↓
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * (1f / jumpCutMultiplier));
-            // cut velocity in half when releasing early
-        }
-
-        // Animator updates
-        animator.SetFloat("moveX", Mathf.Abs(moveInput));
-        animator.SetFloat("moveY", rb.velocity.y);
-        animator.SetBool("isMoving", moveInput != 0);
-
-        // Flip sprite
-        if (moveInput > 0)
-            transform.localScale = new Vector3(1, 1, 1);
-        else if (moveInput < 0)
-            transform.localScale = new Vector3(-1, 1, 1);
-    }
-
-    void FixedUpdate()
-    {
-        // Ground check
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
-        //canJump = isGrounded;
-        //Debug.Log(isGrounded);
-    }
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        // I used a switch to eliminate if statements
-        switch (collision.gameObject.tag)
-        {
-            case "Ground":
-                canJump = true;
-                break;
-            case "Hazard":
-                RemoveHeart();
-                break;
-            case "Finish":
-                WonLevel = true;
-                YouWonText.SetActive(true);
-                FlowButton.SetActive(true);
-                flowButtonText.text = "Next Level";
-               // this.enabled = false;
-                break;
-        }
-    }
-    void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.CompareTag("Coin"))
-            {
-
-                GameData.score += 10;
-                UpdateScoreUI();
-                Destroy(other.gameObject);
-            }
-        }
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            canJump = false;
-        }
-    }
     public void RemoveHeart()
     {
+        if (IsDead) return;
+
         if (hearts.Count > 0)
         {
+            playerMove2.TriggerInvulnerability();
+            
             GameObject lastHeart = hearts[hearts.Count - 1];
-            lastHeart.SetActive(false);   // hides the heart
+            lastHeart.SetActive(false);
             hearts.RemoveAt(hearts.Count - 1);
 
-            Debug.Log("Hearts left: " + hearts.Count);
+            Debug.Log($"Heart removed. Remaining: {hearts.Count}");
 
+            bool facingRight = transform.localScale.x > 0;
+            Vector2 direction = facingRight ? Vector2.left : Vector2.right;
+
+            playerMove2.KnockBack(direction, 3f, 3f);
+
+            StartCoroutine(playerMove2.DamageFlash());
+            
+            // Removes heart, then can check if it was the last one
             if (hearts.Count == 0)
             {
-                Debug.Log("Game Over!");
-
-                rb.velocity = Vector2.zero; // Stop player movement
-                rb.simulated = false; // Disable physics simulation
-                GetComponent<Collider2D>().enabled = false; // Disable collider
-                this.enabled = false; // Disable this script
-
-                GameData.score = 0;
-
-                YouDiedText.SetActive(true);
-                FlowButton.SetActive(true);
-                flowButtonText.text = "Restart";
-                isDead = true;
-
+                KillPlayer();
             }
         }
     }
+
+    private void KillPlayer()
+    {
+        IsDead = true;
+        GameData.score = 0;
+
+        rb.velocity = Vector2.zero;
+        rb.simulated = false;
+        GetComponent<Collider2D>().enabled = false;
+
+        YouDiedText.SetActive(true);
+        FlowButton.SetActive(true);
+        flowButtonText.text = "Restart";
+
+        Debug.Log("Player died!");
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Coin"))
+        {
+            GameData.score += 10;
+            UpdateScoreUI();
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("Finish"))
+        {
+            rb.velocity = Vector2.zero;
+            rb.simulated = false;
+
+            wonLevel = true;
+            YouWonText.SetActive(true);
+            FlowButton.SetActive(true);
+            flowButtonText.text = "Next Level";
+        }
+    }
+
     private void UpdateScoreUI()
     {
-        scoreText.text = "Score: " + GameData.score;
+        if (scoreText != null)
+            scoreText.text = "Score: " + GameData.score;
     }
+
     public void FlowGame()
     {
-        Debug.Log("FlowGame pressed");
-        if (isDead)
-        {
+        if (IsDead)
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        else if (WonLevel)
-        {
+        else if (wonLevel)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-        
     }
- 
-}
 
+    public bool IsInvulnerable
+    {
+    get
+    {
+        PlayerMove2 move = GetComponent<PlayerMove2>();
+        return move != null && move.IsInvulnerable;
+    }
+    }
+}

@@ -10,7 +10,7 @@ public class SpikeHazard : MonoBehaviour
         if (collision.gameObject.tag == "Hazard")
         {
             PlayerControl pc = collision.gameObject.GetComponent<PlayerControl>();
-            if (pc != null)
+            if (pc != null && !pc.IsInvulnerable)
             {
                 pc.RemoveHeart();
             }

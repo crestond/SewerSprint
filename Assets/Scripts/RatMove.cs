@@ -260,6 +260,8 @@ public class RatAI_TagCheck : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool movingRight;
+    private SpriteRenderer sr;
+    private bool isFlashing = false;
     private bool isChasing = false;
     private bool grounded = false;                              // mirrors your PlayerMove2 idea
     private float flipCooldownTimer = 0f;
@@ -291,6 +293,7 @@ public class RatAI_TagCheck : MonoBehaviour
 
     private void Awake()
     {
+        sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         movingRight = startMovingRight;
         if (rb) rb.freezeRotation = true;
@@ -468,5 +471,27 @@ public class RatAI_TagCheck : MonoBehaviour
             Gizmos.DrawLine(wallCheck.position, wallCheck.position + fwd * wallCheckDistance);
         }
     }
+
+    public IEnumerator DamageFlash()
+{
+    if (isFlashing) yield break; // prevent overlapping flashes
+
+    isFlashing = true;
+
+    float flashTime = 0.1f;
+    int flashCount = 4;
+
+    for (int i = 0; i < flashCount; i++)
+    {
+        sr.color = Color.red;
+        yield return new WaitForSeconds(flashTime);
+
+        sr.color = Color.white;
+        yield return new WaitForSeconds(flashTime);
+    }
+
+    isFlashing = false;
+}
+
 }
 
