@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMove2 : MonoBehaviour
@@ -140,7 +141,7 @@ public class PlayerMove2 : MonoBehaviour
                 // Check if the contact point is below the player's center
                 if (contact.normal.y > 0.5f)
                 {
-                    Destroy(collision.gameObject);
+                    StartCoroutine(RatDeathRoutine(collision.gameObject));
                     GameData.score += 5;
                     canJump = true; // Allow jumping again after killing a rat/enemy    
                     return;
@@ -215,4 +216,15 @@ public class PlayerMove2 : MonoBehaviour
             yield return new WaitForSeconds(flashTime);
         }
     }
+
+    private IEnumerator RatDeathRoutine(GameObject rat)
+    {
+    RatAI_TagCheck ai = rat.GetComponent<RatAI_TagCheck>();
+
+    if (ai != null)
+        yield return StartCoroutine(ai.DamageFlash());
+
+    Destroy(rat);
+    }
+
 }
