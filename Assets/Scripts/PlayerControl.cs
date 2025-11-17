@@ -45,7 +45,7 @@ public class PlayerControl : MonoBehaviour
             bool facingRight = transform.localScale.x > 0;
             Vector2 direction = facingRight ? Vector2.left : Vector2.right;
 
-            playerMove2.KnockBack(direction, 5f);
+            playerMove2.KnockBack(direction, 3f, 3f);
 
             StartCoroutine(playerMove2.DamageFlash());
             

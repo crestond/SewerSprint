@@ -163,7 +163,7 @@ public class PlayerMove2 : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Hazard")
+        if (collision.gameObject.tag == "Ground")
         {
             canJump = false;
         }
@@ -171,8 +171,6 @@ public class PlayerMove2 : MonoBehaviour
         if (collision.gameObject.tag == "Rat")
         {
             ratUnderPlayer = null;
-            canJump = false; // Reset jump ability aafter kiling a rat/enemy
-
         }
     }
 
