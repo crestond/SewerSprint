@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMove2 : MonoBehaviour
@@ -33,7 +34,7 @@ public class PlayerMove2 : MonoBehaviour
     private float knockbackTimer = 0f;
     private Rigidbody2D body;
     private Animator anim;
-    //private bool grounded;
+    private SpriteRenderer sr;
 
     [Header("Invulnerability")]
     [SerializeField] private float invulnerabilityDuration = 1f;
@@ -52,6 +53,7 @@ public class PlayerMove2 : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerControl = GetComponent<PlayerControl>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -192,7 +194,7 @@ public class PlayerMove2 : MonoBehaviour
     public void KnockBack(Vector2 direction, float force, float upwardForce = 2f)
     {
         isKnockedback = true;
-        knockbackTimer = 0.67f; // Duration of knockback effect
+        knockbackTimer = 0.5f; // Duration of knockback effect
 
         //kill movement and apply knockback
         body.velocity = Vector2.zero;
@@ -200,5 +202,19 @@ public class PlayerMove2 : MonoBehaviour
         Vector2 knock = new Vector2(direction.x * force, upwardForce);
 
         body.velocity = knock;
+    }
+
+    public IEnumerator DamageFlash()
+    {
+        float flashTime = 0.1f;
+        int flashCount = 4;
+
+        for (int i = 0; i < flashCount; i++)
+        {
+            sr.color = Color.red;
+            yield return new WaitForSeconds(flashTime);
+            sr.color = Color.white;
+            yield return new WaitForSeconds(flashTime);
+        }
     }
 }

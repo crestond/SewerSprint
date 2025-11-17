@@ -46,6 +46,8 @@ public class PlayerControl : MonoBehaviour
             Vector2 direction = facingRight ? Vector2.left : Vector2.right;
 
             playerMove2.KnockBack(direction, 5f);
+
+            StartCoroutine(playerMove2.DamageFlash());
             
             // Removes heart, then can check if it was the last one
             if (hearts.Count == 0)
