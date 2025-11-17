@@ -38,6 +38,9 @@ public class PlayerMove2 : MonoBehaviour
     private float invulnerabilityTimer = 0f;
     public bool IsInvulnerable => invulnerabilityTimer > 0f;
 
+    [Header("Enemies")]
+    private RatAI_TagCheck ratUnderPlayer;
+
     private PlayerControl playerControl;
 
     
@@ -78,6 +81,11 @@ public class PlayerMove2 : MonoBehaviour
         //sets animation*/
         if (Input.GetButtonDown("Jump") && canJump)
         {
+            if (ratUnderPlayer != null)
+            {
+                Destroy(ratUnderPlayer.gameObject);
+                ratUnderPlayer = null;
+            }
 
             body.velocity = new Vector2(body.velocity.x, JumpForce);
             GetComponent<PlayerSound>()?.PlayJumpSound();
@@ -104,10 +112,27 @@ public class PlayerMove2 : MonoBehaviour
         {
             canJump = true;
         }
-        if (collision.gameObject.tag == "Hazard" && !IsInvulnerable && !playerControl.IsDead)
+
+        if (collision.gameObject.tag == "Hazard"  && !IsInvulnerable && !playerControl.IsDead)
         {
             canJump = true;
             playerControl.RemoveHeart();
+        }
+
+        if (collision.gameObject.tag == "Rat")
+        {
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                // Check if the contact point is below the player's center
+                if (contact.normal.y > 0.5f)
+                {
+                    Destroy(collision.gameObject);
+                    canJump = true; // Allow jumping again after killing a rat/enemy    
+                    return;
+                }
+            }
+            TryTakeDamage();
+            return;
         }
     }
 
@@ -127,6 +152,13 @@ public class PlayerMove2 : MonoBehaviour
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Hazard")
         {
             canJump = false;
+        }
+
+        if (collision.gameObject.tag == "Rat")
+        {
+            ratUnderPlayer = null;
+            canJump = false; // Reset jump ability aafter kiling a rat/enemy
+
         }
     }
 
