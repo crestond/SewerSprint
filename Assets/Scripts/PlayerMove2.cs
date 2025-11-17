@@ -141,6 +141,7 @@ public class PlayerMove2 : MonoBehaviour
                 if (contact.normal.y > 0.5f)
                 {
                     Destroy(collision.gameObject);
+                    GameData.score += 5;
                     canJump = true; // Allow jumping again after killing a rat/enemy    
                     return;
                 }
@@ -178,7 +179,6 @@ public class PlayerMove2 : MonoBehaviour
     {
     invulnerabilityTimer = invulnerabilityDuration;
     }
-
 
     private void TryTakeDamage()
     {
