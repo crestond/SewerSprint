@@ -143,6 +143,7 @@ public class PlayerMove2 : MonoBehaviour
                 {
                     StartCoroutine(RatDeathRoutine(collision.gameObject));
                     GameData.score += 5;
+                    playerControl.UpdateScoreUI();
                     canJump = true; // Allow jumping again after killing a rat/enemy    
                     return;
                 }

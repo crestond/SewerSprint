@@ -93,7 +93,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    private void UpdateScoreUI()
+    public void UpdateScoreUI()
     {
         if (scoreText != null)
             scoreText.text = "Score: " + GameData.score;
