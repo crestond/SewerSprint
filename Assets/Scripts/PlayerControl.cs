@@ -12,12 +12,15 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private GameObject YouDiedText;
     [SerializeField] private GameObject YouWonText;
 
+    private PlayerMove2 playerMove2;
+
     private Rigidbody2D rb;
     private bool wonLevel = false;
     public bool IsDead { get; private set; }
 
     private void Awake()
     {
+        playerMove2 = GetComponent<PlayerMove2>();
         rb = GetComponent<Rigidbody2D>();
         FlowButton.SetActive(false);
         YouDiedText.SetActive(false);
@@ -31,7 +34,7 @@ public class PlayerControl : MonoBehaviour
 
         if (hearts.Count > 0)
         {
-            GetComponent<PlayerMove2>()?.TriggerInvulnerability();
+            playerMove2.TriggerInvulnerability();
             
             GameObject lastHeart = hearts[hearts.Count - 1];
             lastHeart.SetActive(false);
@@ -39,6 +42,12 @@ public class PlayerControl : MonoBehaviour
 
             Debug.Log($"Heart removed. Remaining: {hearts.Count}");
 
+            bool facingRight = transform.localScale.x > 0;
+            Vector2 direction = facingRight ? Vector2.left : Vector2.right;
+
+            playerMove2.KnockBack(direction, 5f);
+            
+            // Removes heart, then can check if it was the last one
             if (hearts.Count == 0)
             {
                 KillPlayer();
@@ -74,7 +83,7 @@ public class PlayerControl : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
             rb.simulated = false;
-            
+
             wonLevel = true;
             YouWonText.SetActive(true);
             FlowButton.SetActive(true);

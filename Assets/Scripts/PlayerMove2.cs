@@ -29,6 +29,8 @@ public class PlayerMove2 : MonoBehaviour
     [SerializeField] private float JumpForce = 7f;
     [SerializeField] private float jumpCutMultiplier = 2f;
     private bool canJump;
+    private bool isKnockedback;
+    private float knockbackTimer = 0f;
     private Rigidbody2D body;
     private Animator anim;
     //private bool grounded;
@@ -65,6 +67,16 @@ public class PlayerMove2 : MonoBehaviour
             }
         }
         
+        if (isKnockedback)
+        {
+            knockbackTimer -= Time.deltaTime;
+            if (knockbackTimer <= 0f)
+            {
+                isKnockedback = false;
+            }
+            return; // Skip normal movement while in knockback
+        }
+
         float HorizontalInput = Input.GetAxis("Horizontal");
         body.velocity = new Vector2(HorizontalInput * speed, body.velocity.y);
 
@@ -175,5 +187,18 @@ public class PlayerMove2 : MonoBehaviour
         playerControl.RemoveHeart();
         invulnerabilityTimer = invulnerabilityDuration;
 
+    }
+
+    public void KnockBack(Vector2 direction, float force, float upwardForce = 2f)
+    {
+        isKnockedback = true;
+        knockbackTimer = 0.67f; // Duration of knockback effect
+
+        //kill movement and apply knockback
+        body.velocity = Vector2.zero;
+
+        Vector2 knock = new Vector2(direction.x * force, upwardForce);
+
+        body.velocity = knock;
     }
 }
