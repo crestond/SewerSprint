@@ -72,6 +72,9 @@ public class PlayerControl : MonoBehaviour
         }
         else if (other.CompareTag("Finish"))
         {
+            rb.velocity = Vector2.zero;
+            rb.simulated = false;
+            
             wonLevel = true;
             YouWonText.SetActive(true);
             FlowButton.SetActive(true);
