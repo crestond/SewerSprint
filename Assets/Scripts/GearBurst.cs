@@ -4,6 +4,10 @@ public class Coin : MonoBehaviour
 {
     [SerializeField] private ParticleSystem idleParticles;
     [SerializeField] private ParticleSystem burstParticles;
+    [SerializeField] private AudioClip collectSFX;
+
+    // 👉 new field
+    [SerializeField] private AudioSource sfxSource;
 
     private bool collected = false;
 
@@ -15,21 +19,22 @@ public class Coin : MonoBehaviour
         {
             collected = true;
 
-            // Stop the idle effect
             if (idleParticles != null)
-            {
                 idleParticles.Stop();
+
+            // 🔊 Play through the shared SFX AudioSource (which is on the mixer SFX group)
+            if (sfxSource != null && collectSFX != null)
+            {
+                sfxSource.PlayOneShot(collectSFX);
             }
 
-            // Detach burst so it can play even if we destroy the coin
             if (burstParticles != null)
             {
                 burstParticles.transform.parent = null;
                 burstParticles.Play();
-                Destroy(burstParticles.gameObject, 1f); // clean up after it finishes
+                Destroy(burstParticles.gameObject, 1f);
             }
 
-            // Destroy or disable the coin itself
             Destroy(gameObject);
         }
     }

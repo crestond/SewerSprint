@@ -9856,6 +9856,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idleParticles: {fileID: 2342414395599397537}
   burstParticles: {fileID: 4102186722845763366}
+  collectSFX: {fileID: 8300000, guid: d522dcf3cd009194ba0cd1485a8b2a7f, type: 3}
+  sfxVolume: 1
 --- !u!1 &7180607441192204610
 GameObject:
   m_ObjectHideFlags: 0
