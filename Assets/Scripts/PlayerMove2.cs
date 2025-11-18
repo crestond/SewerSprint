@@ -136,15 +136,24 @@ public class PlayerMove2 : MonoBehaviour
 
         if (collision.gameObject.tag == "Rat")
         {
+
+            RatAI_TagCheck ratAI = collision.gameObject.GetComponent<RatAI_TagCheck>();
+
+            if (ratAI != null && ratAI.isDying) return;
+
             foreach (ContactPoint2D contact in collision.contacts)
             {
                 // Check if the contact point is below the player's center
                 if (contact.normal.y > 0.5f)
                 {
-                    StartCoroutine(RatDeathRoutine(collision.gameObject));
-                    GameData.score += 5;
-                    playerControl.UpdateScoreUI();
-                    canJump = true; // Allow jumping again after killing a rat/enemy    
+                    if (ratAI != null && !ratAI.isDying)
+                    {
+                        GameData.score += 5;
+                        playerControl.UpdateScoreUI();
+                        StartCoroutine(RatDeathRoutine(collision.gameObject));
+
+                    }
+                    canJump = true;  
                     return;
                 }
             }
@@ -223,9 +232,12 @@ public class PlayerMove2 : MonoBehaviour
     RatAI_TagCheck ai = rat.GetComponent<RatAI_TagCheck>();
 
     if (ai != null)
+    {   
+        ai.EnterRatDeathFlash();
         yield return StartCoroutine(ai.DamageFlash());
 
     Destroy(rat);
+    }
     }
 
 }
