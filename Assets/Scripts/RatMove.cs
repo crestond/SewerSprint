@@ -32,6 +32,7 @@ public class RatAI_TagCheck : MonoBehaviour
     private Rigidbody2D rb;
     private bool movingRight;
     private SpriteRenderer sr;
+    public bool isDying = false;
     private bool isFlashing = false;
     private bool isChasing = false;
     private bool grounded = false;                              // mirrors your PlayerMove2 idea
@@ -244,25 +245,35 @@ public class RatAI_TagCheck : MonoBehaviour
     }
 
     public IEnumerator DamageFlash()
-{
-    if (isFlashing) yield break; // prevent overlapping flashes
-
-    isFlashing = true;
-
-    float flashTime = 0.1f;
-    int flashCount = 4;
-
-    for (int i = 0; i < flashCount; i++)
     {
-        sr.color = Color.red;
-        yield return new WaitForSeconds(flashTime);
+        float flashTime = 0.1f;
+        int flashCount = 4;
 
-        sr.color = Color.white;
-        yield return new WaitForSeconds(flashTime);
+        for (int i = 0; i < flashCount; i++)
+        {
+            sr.color = Color.red;
+            yield return new WaitForSeconds(flashTime);
+
+            sr.color = Color.white;
+            yield return new WaitForSeconds(flashTime);
+        }
+
+        Destroy(gameObject);
     }
+    public void EnterRatDeathFlash()
+    {
+        if (isDying) return;
+        isDying = true;
 
-    isFlashing = false;
-}
+        rb.velocity = Vector2.zero; // Stop Movement when he dies
+        rb.simulated = false; // Disable physics interactions
+        this.enabled = false; // Disable this script to stop further movement
+
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null) col.enabled = false; // Disable collider to prevent further interactions
+
+
+    }
 
 }
 
