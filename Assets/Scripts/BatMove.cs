@@ -26,7 +26,9 @@ public class BatAI_TagCheck : MonoBehaviour
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
-    private Transform player;                                   // Player transform (resolved automatically)
+    private Transform player;     
+    
+    public bool ChaseEnabled = false;                              // Player transform (resolved automatically)
 
     private bool movingRight;
     private bool isChasing = false;
@@ -107,6 +109,7 @@ public class BatAI_TagCheck : MonoBehaviour
 
     private void ChasePlayer()
     {
+        if (ChaseEnabled == false) return;
         if (player == null) return;
 
         Vector2 dir = (player.position - transform.position).normalized;
