@@ -130,7 +130,7 @@ public class PlayerMove2 : MonoBehaviour
 
         if (collision.gameObject.tag == "Hazard"  && !IsInvulnerable && !playerControl.IsDead)
         {
-            canJump = true;
+            //canJump = true;
             playerControl.RemoveHeart();
         }
 
