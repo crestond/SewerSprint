@@ -153,7 +153,8 @@ public class PlayerMove2 : MonoBehaviour
                         StartCoroutine(RatDeathRoutine(collision.gameObject));
 
                     }
-                    canJump = true;  
+                    body.velocity = new Vector2(body.velocity.x, JumpForce * 0.75f);
+
                     return;
                 }
             }
