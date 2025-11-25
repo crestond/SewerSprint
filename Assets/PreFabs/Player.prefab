@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 1866399762117519587}
   - component: {fileID: 4533655950400264278}
   - component: {fileID: 3262727022201805887}
+  - component: {fileID: 2380866066520184972}
+  - component: {fileID: 5387831818388229610}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -79,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -603576439, guid: a9f49c67d3d382e4481c566aa9c99daa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.96981126, g: 0.96981126, b: 0.96981126, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,25 +103,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e41756ec708e9b4db9a0a6807876612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  moveSpeed: 5
-  jumpForce: 7
-  scoreText: {fileID: 0}
-  jumpCutMultiplier: 2
   hearts:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  RestartButton: {fileID: 0}
+  scoreText: {fileID: 0}
+  flowButtonText: {fileID: 0}
+  FlowButton: {fileID: 0}
   YouDiedText: {fileID: 0}
   YouWonText: {fileID: 0}
-  groundCheck: {fileID: 0}
-  groundCheckRadius: 1.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!95 &5378194235436036961
 Animator:
   serializedVersion: 5
@@ -215,6 +209,117 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6a6cc2a62f583429d4167f5be172b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 4
   JumpForce: 7
   jumpCutMultiplier: 2
+  invulnerabilityDuration: 1
+--- !u!82 &2380866066520184972
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8214494286519119216}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -2633545657610416888, guid: 0ce9760d8bfd37542ad5b66506891d00, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 66625be6a688a174eaf66c6cefd4a6e3, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5387831818388229610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8214494286519119216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38846124d1c4dc9429ef74186fc8f624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpSound: {fileID: 8300000, guid: 240d22c607fb47447bb03b272f51a328, type: 3}
+  audioSource: {fileID: 0}
