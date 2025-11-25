@@ -161,6 +161,41 @@ public class PlayerMove2 : MonoBehaviour
             TryTakeDamage();
             return;
         }
+
+        if (collision.gameObject.tag == "RatBoss")
+        {
+            RatAI_TagCheck ratAI = collision.gameObject.GetComponent<RatAI_TagCheck>();
+            RatBossHealth boss = collision.gameObject.GetComponent<RatBossHealth>();
+
+            if (ratAI != null && ratAI.isDying) return;
+
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                // Stomp from above
+                if (contact.normal.y > 0.5f)
+                {
+                    // Bounce no matter what
+                    body.velocity = new Vector2(body.velocity.x, JumpForce * 0.75f);
+
+                    // If boss exists & can take damage
+                    if (boss != null && !boss.IsInvulnerable)
+                    {
+                        GameData.score += 5;
+                        playerControl.UpdateScoreUI();
+
+                        boss.TakeDamage(this.transform);
+                    }
+
+                    // STOMP resolves the collision entirely
+                    return;
+                }
+            }
+
+            // If NOT stomp → player takes damage
+            TryTakeDamage();
+            return;
+        }
+
     }
 
         void OnCollisionStay2D(Collision2D collision)
