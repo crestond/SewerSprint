@@ -551,7 +551,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 27718181
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -10918,7 +10918,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -158143591
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
   m_Color: {r: 0, g: 0.8680749, b: 1, a: 1}
@@ -10954,6 +10954,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 861118117803302946, guid: 5a0b955a8f468f34ebd9020d3b7ca597, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117120636872811656, guid: 5a0b955a8f468f34ebd9020d3b7ca597, type: 3}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 1117120636872811656, guid: 5a0b955a8f468f34ebd9020d3b7ca597, type: 3}
       propertyPath: m_BackGroundColor.b
       value: 0.3056603
@@ -10969,6 +10977,10 @@ PrefabInstance:
     - target: {fileID: 4102034348886968034, guid: 5a0b955a8f468f34ebd9020d3b7ca597, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4570980147122416553, guid: 5a0b955a8f468f34ebd9020d3b7ca597, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8088265794026979106, guid: 5a0b955a8f468f34ebd9020d3b7ca597, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12398,7 +12410,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 27718181
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
