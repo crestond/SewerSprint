@@ -14,6 +14,8 @@ public class RatBossHealth : MonoBehaviour
     [SerializeField] private List<GameObject> bossHearts;
 
 
+    private PlayerMove2 player;
+
     private int currentHearts;
     private bool isInvulnerable = false;
     public bool IsInvulnerable => isInvulnerable;
@@ -28,6 +30,8 @@ public class RatBossHealth : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         ai = GetComponent<RatAI_TagCheck>();
+
+        player = FindObjectOfType<PlayerMove2>();
 
             // AUTO-POPULATE HEARTS
         if (heartsParent != null)

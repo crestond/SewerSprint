@@ -246,7 +246,7 @@ public class PlayerMove2 : MonoBehaviour
 
         Vector2 knock = new Vector2(direction.x * force, upwardForce);
 
-        body.velocity = knock;
+        body.AddForce(knock, ForceMode2D.Impulse);
     }
 
     public IEnumerator DamageFlash()
