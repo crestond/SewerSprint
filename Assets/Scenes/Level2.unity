@@ -3692,7 +3692,7 @@ PrefabInstance:
       objectReference: {fileID: 1874187136}
     - target: {fileID: 4659718156392642606, guid: e53ce0e979d88f344b9b4560be5e2e7e, type: 3}
       propertyPath: saveGameLine
-      value: Sure, take a load off and relax!
+      value: 'Sure, take a load off and relax! '
       objectReference: {fileID: 0}
     - target: {fileID: 4659718156392642606, guid: e53ce0e979d88f344b9b4560be5e2e7e, type: 3}
       propertyPath: dialoguePanel
