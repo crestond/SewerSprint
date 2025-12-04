@@ -5,7 +5,7 @@ using TMPro;
 
 public class PlayerControl : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> hearts;
+    [SerializeField] public List<GameObject> hearts;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI flowButtonText;
     [SerializeField] private GameObject FlowButton;

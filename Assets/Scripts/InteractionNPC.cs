@@ -20,6 +20,7 @@ public class NPCDialogueStateMachine : MonoBehaviour
     [TextArea] public string whoAreYouAnswer;
     [TextArea] public string exitAnswer;
     [TextArea] public string shopAnswer;
+    [TextArea] public string saveGameLine;
 
     private bool isTalking;
     private bool inRange;
@@ -140,7 +141,8 @@ public class NPCDialogueStateMachine : MonoBehaviour
                          "2) How do I get out of this place?";
 
         if (hasUnlockedShopQuestion)
-            choices += "\n3) What do you sell?";
+            choices += "\n3) What do you sell?" +
+                        "\n4) Can I Rest Here?";
 
         //choices += "\n\n(Press 1, 2, or 3 to choose.)";
 
@@ -175,6 +177,8 @@ public class NPCDialogueStateMachine : MonoBehaviour
             OnExit();
         else if (Input.GetKeyDown(KeyCode.Alpha3))
             OnShop();
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+            OnSaveGameChosen();
     }
 
     // ---- CHOICE RESPONSES ------------------
@@ -200,4 +204,26 @@ public class NPCDialogueStateMachine : MonoBehaviour
         mode = DialogueMode.Shop;
         ShowNPCLine(shopAnswer);
     }
+    void OnSaveGameChosen()
+{
+    // Actually save the game
+    if (GameManager.Instance != null)
+    {
+        GameManager.Instance.SaveGame();
+    }
+    else
+    {
+        Debug.LogWarning("No GameManager in scene – can't save game.");
+    }
+
+    // Show NPC's save confirmation line using your standard NPC flow
+    // (This adds the "Press E to continue" message and sets state correctly.)
+    ShowNPCLine(saveGameLine);
+
+    // Optional: if you end up adding a Save mode later, you could set it here.
+    // For now, we can just leave `mode` as-is, because AdvanceNPCLine()
+    // falls through to ShowPlayerChoices() in the default case.
+}
+
+
 }
