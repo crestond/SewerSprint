@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerSound : MonoBehaviour
 {
     [SerializeField] public AudioClip jumpSound;
+    [SerializeField] public AudioClip hurtSound;
     [SerializeField] private AudioSource audioSource;
 
     void Start()
@@ -15,5 +16,9 @@ public class PlayerSound : MonoBehaviour
     public void PlayJumpSound()
     {
         audioSource.PlayOneShot(jumpSound, .5f);
+    }
+    public void PlayHurtSound()
+    {
+        audioSource.PlayOneShot(hurtSound, .5f);
     }
 }

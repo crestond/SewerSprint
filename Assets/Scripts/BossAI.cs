@@ -3,38 +3,46 @@ using UnityEngine;
 
 public class BossAI : MonoBehaviour
 {
-    [Header("Stats")]
+    [Header("Movement")]
     [SerializeField] private float moveSpeed = 2f;
-    [SerializeField] private float chaseRange = 5f;
+    [SerializeField] private float chaseRange = 6f;
     [SerializeField] private float attackRange = 1.2f;
 
-    [Header("Player Detection")]
-    [SerializeField] private bool autoFindPlayer = true;
-    private Transform player;
+    [Header("Recoil Settings")]
+    [SerializeField] private float recoilSpeed = 8f;
+    [SerializeField] private float recoilDuration = 0.25f;
 
-    private int currentHealth;
+    private bool isRecoiling = false;
+    private float recoilTimer = 0f;
+    private int recoilDirection = 1;
+
+    private Transform player;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
-    private bool isAttacking = false;
-    private bool isInvulnerable = false;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
-        if (autoFindPlayer)
-            ResolvePlayerReference();
-    }
-
-    private void ResolvePlayerReference()
-    {
-        var p = FindObjectOfType<PlayerMove2>();
+        PlayerMove2 p = FindObjectOfType<PlayerMove2>();
         if (p != null) player = p.transform;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
+        // Recoil override
+        if (isRecoiling)
+        {
+            rb.velocity = new Vector2(recoilDirection * recoilSpeed, rb.velocity.y);
+            recoilTimer -= Time.fixedDeltaTime;
+
+            if (recoilTimer <= 0f)
+                isRecoiling = false;
+
+            return;
+        }
+
         if (player == null) return;
 
         float dist = Vector2.Distance(transform.position, player.position);
@@ -42,8 +50,6 @@ public class BossAI : MonoBehaviour
         if (dist <= attackRange)
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
-            if (!isAttacking)
-                StartCoroutine(AttackRoutine());
         }
         else if (dist <= chaseRange)
         {
@@ -51,77 +57,34 @@ public class BossAI : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector2(0, rb.velocity.y); // idle
+            rb.velocity = new Vector2(0, rb.velocity.y);
         }
-
-        FacePlayer();
     }
 
     private void ChasePlayer()
     {
         float dir = player.position.x > transform.position.x ? 1f : -1f;
         rb.velocity = new Vector2(dir * moveSpeed, rb.velocity.y);
+        FaceDirection((int)dir);
     }
 
-    private void FacePlayer()
+    private void FaceDirection(int direction)
     {
-        if (!player) return;
-        float dir = player.position.x > transform.position.x ? 1f : -1f;
-
         Vector3 s = transform.localScale;
-        if (dir > 0 && s.x < 0) s.x *= -1;
-        if (dir < 0 && s.x > 0) s.x *= -1;
+
+        if (direction > 0 && s.x < 0) s.x *= -1;
+        else if (direction < 0 && s.x > 0) s.x *= -1;
+
         transform.localScale = s;
     }
 
-    private IEnumerator AttackRoutine()
+    public void StartRecoil(bool attackerIsRight)
     {
-        isAttacking = true;
+        recoilDirection = attackerIsRight ? -1 : 1;
+        FaceDirection(recoilDirection);
 
-        // TODO: Trigger your boss attack animation here
-        yield return new WaitForSeconds(0.4f);
-
-        // TODO: Damage the player here
-
-        yield return new WaitForSeconds(0.6f);
-        isAttacking = false;
-    }
-
-    // --------- Damage & Death ----------
-    public void TakeDamage(int amount)
-    {
-        if (isInvulnerable) return;
-
-        currentHealth -= amount;
-
-        if (currentHealth <= 0)
-            Die();
-        else
-            StartCoroutine(DamageFlash());
-    }
-
-    private IEnumerator DamageFlash()
-    {
-        isInvulnerable = true;
-
-        for (int i = 0; i < 3; i++)
-        {
-            sr.color = Color.red;
-            yield return new WaitForSeconds(0.1f);
-            sr.color = Color.white;
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        isInvulnerable = false;
-    }
-
-    private void Die()
-    {
-        rb.velocity = Vector2.zero;
-        rb.simulated = false;
-        GetComponent<Collider2D>().enabled = false;
-
-        // TODO: play death animation
-        Destroy(gameObject, 0.3f);
+        isRecoiling = true;
+        recoilTimer = recoilDuration;
+        rb.velocity = new Vector2(recoilDirection * recoilSpeed, rb.velocity.y);
     }
 }
