@@ -48,7 +48,9 @@ public class PlayerControl : MonoBehaviour
             playerMove2.KnockBack(direction, 3f, 3f);
 
             StartCoroutine(playerMove2.DamageFlash());
-            
+
+            GetComponent<PlayerSound>()?.PlayHurtSound();
+
             // Removes heart, then can check if it was the last one
             if (hearts.Count == 0)
             {
