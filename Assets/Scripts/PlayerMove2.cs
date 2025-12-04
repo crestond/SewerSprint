@@ -134,67 +134,69 @@ public class PlayerMove2 : MonoBehaviour
             playerControl.RemoveHeart();
         }
 
-        if (collision.gameObject.tag == "Rat")
-        {
-
-            RatAI_TagCheck ratAI = collision.gameObject.GetComponent<RatAI_TagCheck>();
-
-            if (ratAI != null && ratAI.isDying) return;
-
-            foreach (ContactPoint2D contact in collision.contacts)
+            if (collision.gameObject.tag == "Rat")
             {
-                // Check if the contact point is below the player's center
-                if (contact.normal.y > 0.5f)
+
+                RatAI_TagCheck ratAI = collision.gameObject.GetComponent<RatAI_TagCheck>();
+
+                if (ratAI != null && ratAI.isDying) return;
+
+                foreach (ContactPoint2D contact in collision.contacts)
                 {
-                    if (ratAI != null && !ratAI.isDying)
+                    // Check if the contact point is below the player's center
+                    if (contact.normal.y > 0.5f)
                     {
-                        GameData.score += 5;
-                        playerControl.UpdateScoreUI();
-                        StartCoroutine(RatDeathRoutine(collision.gameObject));
+                        if (ratAI != null && !ratAI.isDying)
+                        {
+                            GameData.score += 5;
+                            playerControl.UpdateScoreUI();
+                            StartCoroutine(RatDeathRoutine(collision.gameObject));
 
+                        }
+                        body.velocity = new Vector2(body.velocity.x, JumpForce * 0.75f);
+
+                        return;
                     }
-                    body.velocity = new Vector2(body.velocity.x, JumpForce * 0.75f);
-
-                    return;
                 }
+                TryTakeDamage();
+                return;
             }
-            TryTakeDamage();
+
+            if (collision.gameObject.tag == "RatBoss")
+            {
+                RatAI_TagCheck ratAI = collision.gameObject.GetComponent<RatAI_TagCheck>();
+                RatBossHealth boss = collision.gameObject.GetComponent<RatBossHealth>();
+
+                if (ratAI != null && ratAI.isDying) return;
+
+                foreach (ContactPoint2D contact in collision.contacts)
+                {
+                    // --- STOMP ---
+                    if (contact.normal.y > 0.5f)
+                    {
+                        // Bounce higher on boss
+                        body.velocity = new Vector2(body.velocity.x, JumpForce * 1.3f);
+
+                        if (boss != null && !boss.IsInvulnerable)
+                        {
+                            GameData.score += 5;
+                            playerControl.UpdateScoreUI();
+                            boss.TakeDamage(this.transform);
+                        }
+
+                return;
+            }
+        }
+        // --- SIDE HIT (player takes knockback + boss damage) ---
+        if (boss != null)
+        {
+            boss.KnockbackPlayer(); //
             return;
         }
 
-        if (collision.gameObject.tag == "RatBoss")
-        {
-            RatAI_TagCheck ratAI = collision.gameObject.GetComponent<RatAI_TagCheck>();
-            RatBossHealth boss = collision.gameObject.GetComponent<RatBossHealth>();
+        return;
+    }
 
-            if (ratAI != null && ratAI.isDying) return;
-
-            foreach (ContactPoint2D contact in collision.contacts)
-            {
-                // Stomp from above
-                if (contact.normal.y > 0.5f)
-                {
-                    // Bounce no matter what
-                    body.velocity = new Vector2(body.velocity.x, JumpForce * 0.75f);
-
-                    // If boss exists & can take damage
-                    if (boss != null && !boss.IsInvulnerable)
-                    {
-                        GameData.score += 5;
-                        playerControl.UpdateScoreUI();
-
-                        boss.TakeDamage(this.transform);
-                    }
-
-                    // STOMP resolves the collision entirely
-                    return;
-                }
-            }
-
-            // If NOT stomp → player takes damage
-            TryTakeDamage();
-            return;
-        }
 
     }
 
@@ -239,7 +241,7 @@ public class PlayerMove2 : MonoBehaviour
     public void KnockBack(Vector2 direction, float force, float upwardForce = 2f)
     {
         isKnockedback = true;
-        knockbackTimer = 0.5f; // Duration of knockback effect
+        knockbackTimer = 0.25f + force * 0.05f; // Duration of knockback effect
 
         //kill movement and apply knockback
         body.velocity = Vector2.zero;

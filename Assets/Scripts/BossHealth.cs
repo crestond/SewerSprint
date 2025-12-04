@@ -5,32 +5,35 @@ using UnityEngine;
 
 public class RatBossHealth : MonoBehaviour
 {
-    [Header("Health Settings")]
+[Header("Health Settings")]
     [SerializeField] private int maxHearts = 5;
     [SerializeField] private float invulnerabilityDuration = 1f;
-    [SerializeField] private float knockbackForceX = 4f;
-    [SerializeField] private float knockbackForceY = 4f;
+
+    [Header("Boss Recoil Settings")]
+    [SerializeField] private float recoilDuration = 0.25f;
+
+    [Header("Player Knockback Settings")]
+    [SerializeField] private float playerKnockbackX = 14f;
+    [SerializeField] private float playerKnockbackY = 8f;
+
+    [Header("Boss Hearts UI")]
     [SerializeField] private Transform heartsParent; 
-    [SerializeField] private List<GameObject> bossHearts;
-
-
-    private PlayerMove2 player;
+    [SerializeField] private List<GameObject> bossHearts = new List<GameObject>();
 
     private int currentHearts;
     private bool isInvulnerable = false;
-    public bool IsInvulnerable => isInvulnerable;
     private bool isDead = false;
 
-    private Rigidbody2D rb;
+    private PlayerMove2 player;
     private SpriteRenderer sr;
-    private RatAI_TagCheck ai;
+    private BossAI ai;
+
+    public bool IsInvulnerable => isInvulnerable;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        ai = GetComponent<RatAI_TagCheck>();
-
+        ai = GetComponent<BossAI>();
         player = FindObjectOfType<PlayerMove2>();
 
             // AUTO-POPULATE HEARTS
@@ -45,39 +48,50 @@ public class RatBossHealth : MonoBehaviour
 
         currentHearts = maxHearts;
     }
-
     public void TakeDamage(Transform attacker)
     {
         if (isDead || isInvulnerable) return;
 
         currentHearts--;
-        GameObject lastHeart = bossHearts[bossHearts.Count - 1];
-        lastHeart.SetActive(false);
-        bossHearts.RemoveAt(bossHearts.Count - 1);
 
-        rb.bodyType = RigidbodyType2D.Kinematic;
-        StartCoroutine(RestoreDynamic());
+        // Remove a heart UI
+        if (bossHearts.Count > 0)
+        {
+            GameObject last = bossHearts[bossHearts.Count - 1];
+            last.SetActive(false);
+            bossHearts.RemoveAt(bossHearts.Count - 1);
+        }
 
         TriggerInvulnerability();
-        Knockback(attacker);
+        HandleRecoil(attacker);
         StartCoroutine(DamageFlash());
 
         if (currentHearts <= 0)
             KillBoss();
     }
 
-    private void Knockback(Transform attacker)
+    private void HandleRecoil(Transform attacker)
     {
-        rb.velocity = Vector2.zero;
-
         bool attackerIsRight = attacker.position.x > transform.position.x;
-        Vector2 dir = attackerIsRight ? Vector2.left : Vector2.right;
 
-        rb.AddForce(
-            new Vector2(dir.x * knockbackForceX, knockbackForceY),
-            ForceMode2D.Impulse
-        );
+        if (ai != null)
+            ai.StartRecoil(attackerIsRight);
     }
+
+    public void KnockbackPlayer()
+    {
+        if (player == null) return;
+
+        PlayerControl pc = player.GetComponent<PlayerControl>();
+        if (pc == null || pc.IsDead || player.IsInvulnerable) return;
+
+        bool playerIsRight = player.transform.position.x > transform.position.x;
+        Vector2 dir = playerIsRight ? Vector2.right : Vector2.left;
+
+        pc.RemoveHeart();
+        player.KnockBack(dir, playerKnockbackX, playerKnockbackY); // tweakable values, serialized
+    }
+
 
     private void TriggerInvulnerability()
     {
@@ -109,8 +123,6 @@ public class RatBossHealth : MonoBehaviour
         if (isDead) return;
 
         isDead = true;
-        rb.velocity = Vector2.zero;
-        rb.simulated = false;
 
         if (ai != null)
             ai.enabled = false;
@@ -128,9 +140,4 @@ public class RatBossHealth : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private IEnumerator RestoreDynamic()
-    {
-        yield return new WaitForSeconds(0.2f);
-        rb.bodyType = RigidbodyType2D.Dynamic;
-    }
 }

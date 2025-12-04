@@ -29269,8 +29269,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHearts: 18
   invulnerabilityDuration: 0.7
-  knockbackForceX: 30
-  knockbackForceY: 30
+  knockbackForceX: 3
+  knockbackForceY: 3
+  playerKnockbackX: 12
+  playerKnockbackY: 6
   heartsParent: {fileID: 700107675}
   bossHearts: []
 --- !u!1 &2071520441 stripped
