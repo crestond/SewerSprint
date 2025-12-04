@@ -44113,10 +44113,22 @@ PrefabInstance:
       propertyPath: speed
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3262727022201805887, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
+      propertyPath: hurtSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 955618897e5c110468ffc955b3a9615b, type: 3}
+    - target: {fileID: 3262727022201805887, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
+      propertyPath: playerSound
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5378194235436036961, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 48aca70960d753342b8979c68f1256df, type: 2}
+    - target: {fileID: 5387831818388229610, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
+      propertyPath: hurtSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 955618897e5c110468ffc955b3a9615b, type: 3}
     - target: {fileID: 8214494286519119216, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -44129,7 +44141,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5387831818388229610, guid: 02eb286d2ea654a4b88694f9f930685f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -44418,6 +44431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpSound: {fileID: 8300000, guid: 240d22c607fb47447bb03b272f51a328, type: 3}
+  hurtSound: {fileID: 8300000, guid: 955618897e5c110468ffc955b3a9615b, type: 3}
   audioSource: {fileID: 1000135506}
 --- !u!1 &1748251904 stripped
 GameObject:
