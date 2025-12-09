@@ -10018,7 +10018,7 @@ PrefabInstance:
     - target: {fileID: 8249049731290016567, guid: fdc780065c921a244a1e32c81564c8bd, type: 3}
       propertyPath: sfxSource
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1788871560}
     - target: {fileID: 8249049731290016567, guid: fdc780065c921a244a1e32c81564c8bd, type: 3}
       propertyPath: collectSFX
       value: 
@@ -10451,7 +10451,7 @@ PrefabInstance:
     - target: {fileID: 8249049731290016567, guid: fdc780065c921a244a1e32c81564c8bd, type: 3}
       propertyPath: sfxSource
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1788871560}
     - target: {fileID: 8249049731290016567, guid: fdc780065c921a244a1e32c81564c8bd, type: 3}
       propertyPath: collectSFX
       value: 
@@ -11115,7 +11115,7 @@ PrefabInstance:
     - target: {fileID: 8249049731290016567, guid: fdc780065c921a244a1e32c81564c8bd, type: 3}
       propertyPath: sfxSource
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1788871560}
     - target: {fileID: 8249049731290016567, guid: fdc780065c921a244a1e32c81564c8bd, type: 3}
       propertyPath: collectSFX
       value: 
@@ -15151,6 +15151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpSound: {fileID: 8300000, guid: 240d22c607fb47447bb03b272f51a328, type: 3}
+  hurtSound: {fileID: 0}
   audioSource: {fileID: 1788871560}
 --- !u!82 &1793273155
 AudioSource:
@@ -15476,7 +15477,7 @@ PrefabInstance:
     - target: {fileID: 8249049731290016567, guid: fdc780065c921a244a1e32c81564c8bd, type: 3}
       propertyPath: sfxSource
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1788871560}
     - target: {fileID: 8249049731290016567, guid: fdc780065c921a244a1e32c81564c8bd, type: 3}
       propertyPath: collectSFX
       value: 

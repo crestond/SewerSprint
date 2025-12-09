@@ -82,6 +82,12 @@ public class RatAI_TagCheck : MonoBehaviour
 
     private void Update()
     {
+
+        if (autoFindPlayer && (player == null))
+        {
+            ResolvePlayerReference();
+        }
+        
         // If we still don't have a player, just patrol
         if (player == null)
         {

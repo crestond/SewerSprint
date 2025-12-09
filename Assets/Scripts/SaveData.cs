@@ -12,6 +12,7 @@ public class SaveData
     public int score;
     public int gearsCollected;
     public int playerHealth;
+    public bool hasSeenLevel1Intro;
 
     // Add more later if needed:
     // public int coins;

@@ -47,6 +47,11 @@ public class PlayerMove2 : MonoBehaviour
 
     private PlayerControl playerControl;
 
+    [Header("Control")]
+    public bool allowInput = true;   
+
+
+
     
     private void Awake()
     {
@@ -78,6 +83,11 @@ public class PlayerMove2 : MonoBehaviour
                 isKnockedback = false;
             }
             return; // Skip normal movement while in knockback
+        }
+
+        if (!allowInput)
+        {
+            return;
         }
 
         float HorizontalInput = Input.GetAxis("Horizontal");
@@ -277,5 +287,32 @@ public class PlayerMove2 : MonoBehaviour
     Destroy(rat);
     }
     }
+
+    /*public void SetAllowInput(bool value)
+    {
+        allowInput = value;
+
+        if (!value)
+        {
+            // Stop player movement & walking animation when we take control away
+            body.velocity = new Vector2(0f, body.velocity.y);
+            if (anim != null)
+            {
+                anim.SetBool("walk", false);
+            }
+        }
+    }*/
+
+    public void SetAllowInput(bool value)
+    {
+        allowInput = value;
+        if (!value)
+        {
+            body.velocity = new Vector2(0f, body.velocity.y);
+            anim.SetBool("walk", false);
+        }
+    }
+
+
 
 }

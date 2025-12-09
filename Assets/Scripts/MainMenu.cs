@@ -41,6 +41,8 @@ public class MainMenu : MonoBehaviour
     // New Game
     public void PlayGame()
     {
+        GameData.startingFromSave = false;    // we want the intro cutscene
+        GameData.hasSeenLevel1Intro = false;
         // Optional: wipe old save when starting totally fresh
         SaveSystem.DeleteSave();
         GameData.score = 0;
@@ -63,6 +65,8 @@ public class MainMenu : MonoBehaviour
     // Continue Game
     public void ContinueGame()
     {
+        GameData.startingFromSave = true;     // <-- skip intro on this run
+
         if (!SaveSystem.SaveFileExists())
         {
             Debug.LogWarning("MainMenu: No save file found when trying to continue.");
