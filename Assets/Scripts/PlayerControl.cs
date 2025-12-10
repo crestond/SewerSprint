@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.VisualScripting;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class PlayerControl : MonoBehaviour
     private PlayerMove2 playerMove2;
 
     private Rigidbody2D rb;
-    private bool wonLevel = false;
+    public bool wonLevel = false;
+    public bool killedBoss = false;
     public bool IsDead { get; private set; }
 
     private void Awake()
@@ -104,9 +106,21 @@ public class PlayerControl : MonoBehaviour
     public void FlowGame()
     {
         if (IsDead)
+        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
         else if (wonLevel)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        {
+            if (killedBoss)
+            {
+                SceneManager.LoadScene("Title");
+                
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+        }
     }
 
     public bool IsInvulnerable

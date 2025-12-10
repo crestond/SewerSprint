@@ -29,6 +29,8 @@ public class RatBossHealth : MonoBehaviour
     private BossAI ai;
 
     public bool IsInvulnerable => isInvulnerable;
+    [SerializeField] private GameObject YouWonText;
+    [SerializeField] private GameObject FlowButton;
 
     private void Awake()
     {
@@ -123,11 +125,21 @@ public class RatBossHealth : MonoBehaviour
 
         isDead = true;
 
+        PlayerControl pc = FindObjectOfType<PlayerControl>();
+        if (pc != null)
+        {
+            pc.wonLevel = true;
+            pc.killedBoss = true;
+        }
+
         if (ai != null)
             ai.enabled = false;
 
         Collider2D col = GetComponent<Collider2D>();
         if (col) col.enabled = false;
+
+        YouWonText.SetActive(true);
+        FlowButton.SetActive(true);
 
         StartCoroutine(DeathCleanup());
     }
