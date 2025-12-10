@@ -10956,7 +10956,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 861118117803302946, guid: 5a0b955a8f468f34ebd9020d3b7ca597, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1117120636872811656, guid: 5a0b955a8f468f34ebd9020d3b7ca597, type: 3}
       propertyPath: field of view
@@ -10980,7 +10980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4570980147122416553, guid: 5a0b955a8f468f34ebd9020d3b7ca597, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8088265794026979106, guid: 5a0b955a8f468f34ebd9020d3b7ca597, type: 3}
       propertyPath: m_LocalPosition.x
