@@ -72,10 +72,9 @@ public class RatBossHealth : MonoBehaviour
 
     private void HandleRecoil(Transform attacker)
     {
-        bool attackerIsRight = attacker.position.x > transform.position.x;
 
         if (ai != null)
-            ai.StartRecoil(attackerIsRight);
+            ai.StartRecoil();
     }
 
     public void KnockbackPlayer()
@@ -139,5 +138,4 @@ public class RatBossHealth : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         Destroy(gameObject);
     }
-
 }

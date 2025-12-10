@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -11,10 +12,11 @@ public class BossAI : MonoBehaviour
     [Header("Recoil Settings")]
     [SerializeField] private float recoilSpeed = 8f;
     [SerializeField] private float recoilDuration = 0.25f;
+    private Boolean recoilSwitch = true;
 
-    private bool isRecoiling = false;
-    private float recoilTimer = 0f;
-    private int recoilDirection = 1;
+    public bool isRecoiling = false;
+    public float recoilTimer = 0f;
+    public int recoilDirection = 1;
 
     private Transform player;
     private Rigidbody2D rb;
@@ -68,7 +70,7 @@ public class BossAI : MonoBehaviour
         FaceDirection((int)dir);
     }
 
-    private void FaceDirection(int direction)
+    public void FaceDirection(int direction)
     {
         Vector3 s = transform.localScale;
 
@@ -78,13 +80,17 @@ public class BossAI : MonoBehaviour
         transform.localScale = s;
     }
 
-    public void StartRecoil(bool attackerIsRight)
+    public void StartRecoil()
     {
-        recoilDirection = attackerIsRight ? -1 : 1;
+    
+        recoilDirection = recoilSwitch ? -1 : 1;
         FaceDirection(recoilDirection);
 
         isRecoiling = true;
         recoilTimer = recoilDuration;
         rb.velocity = new Vector2(recoilDirection * recoilSpeed, rb.velocity.y);
+        recoilSwitch = !recoilSwitch;
     }
+    
+
 }
